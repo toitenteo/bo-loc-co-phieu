@@ -1,0 +1,21 @@
+name: Daily Stock Scanneron:schedule:# Tự động chạy lúc 08:30 UTC (tức 15:30 chiều giờ Việt Nam) từ Thứ 2 đến Thứ 6- cron: '30 8 * * 1-5'workflow_dispatch: # Cho phép bấm nút chạy thủ công bất cứ lúc nàopermissions:contents: writejobs:scan:runs-on: ubuntu-lateststeps:- name: Checkout repositoryuses: actions/checkout@v4  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: '3.11'
+
+  - name: Install dependencies
+    run: pip install -r requirements.txt
+
+  - name: Run stock scanner
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    run: python scanner.py
+
+  - name: Commit and push results
+    run: |
+      git config --global user.name "github-actions[bot]"
+      git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      git add KET_QUA_LOC.md
+      git commit -m "Cập nhật kết quả lọc cổ phiếu tự động" || exit 0
+      git push
