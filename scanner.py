@@ -43,11 +43,13 @@ def get_all_stocks():
         res = requests.get(url, headers=HEADERS, timeout=15)
         res.raise_for_status()
         data = res.json().get("data", [])
-        return [
+        stocks = [
             {"symbol": item["code"], "floor": item["floor"]}
             for item in data
             if item.get("code") and len(item["code"]) == 3
         ]
+        print(f"Đã tải danh sách {len(stocks)} mã cổ phiếu.")
+        return stocks
     except Exception as exc:
         print(f"[Lỗi] Không tải được danh sách mã: {exc}")
         return []
@@ -258,19 +260,25 @@ def send_telegram_alert(swing_df, invest_df, timestamp_str):
 
 
 def main():
-    stocks = get_all_stocks()
-    if not stocks:
-        return
+    vn_tz = timezone(timedelta(hours=7))
+    now_str = datetime.now(vn_tz).strftime("%d/%m/%Y %H:%M")
 
+    stocks = get_all_stocks()
     results = []
-    with ThreadPoolExecutor(max_workers=6) as executor:
-        futures = [executor.submit(fetch_stock_data, s) for s in stocks]
-        for future in as_completed(futures):
-            data = future.result()
-            if data:
-                results.append(data)
+
+    if stocks:
+        with ThreadPoolExecutor(max_workers=6) as executor:
+            futures = [executor.submit(fetch_stock_data, s) for s in stocks]
+            for future in as_completed(futures):
+                data = future.result()
+                if data:
+                    results.append(data)
+
+    print(f"Số mã đạt chuẩn thanh khoản phân tích: {len(results)}")
 
     if not results:
+        empty_df = pd.DataFrame()
+        export_markdown_report(empty_df, empty_df, empty_df, now_str)
         return
 
     df_all = pd.DataFrame(results)
@@ -300,9 +308,6 @@ def main():
         & (df_all["pe"] > 0)
         & (df_all["pe"] <= CONFIG["INVEST_MAX_PE"])
     ].sort_values(by=["roe", "profit_growth"], ascending=False)
-
-    vn_tz = timezone(timedelta(hours=7))
-    now_str = datetime.now(vn_tz).strftime("%d/%m/%Y %H:%M")
 
     export_markdown_report(df_all, swing_df, invest_df, now_str)
     send_telegram_alert(swing_df, invest_df, now_str)
