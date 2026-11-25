@@ -1,7 +1,7 @@
-# Báo Cáo Quét Cổ Phiếu Tự Động (24/11/2026 16:41 GMT+7)
+# Báo Cáo Quét Cổ Phiếu Tự Động (25/11/2026 16:45 GMT+7)
 
-- Tổng số mã đủ điều kiện thanh khoản phân tích: **135 mã**
-- Số mã đạt chuẩn **Swing Trading**: **4 mã**
+- Tổng số mã đủ điều kiện thanh khoản phân tích: **134 mã**
+- Số mã đạt chuẩn **Swing Trading**: **5 mã**
 - Số mã đạt chuẩn **Đầu tư cơ bản**: **0 mã**
 
 ---
@@ -10,10 +10,11 @@
 
 | Mã | Sàn | Giá | RS Rating | GTGD 20P (Tỷ) | ATR (%) | Vol/TB20 | Biên độ 5P | Tín hiệu nổi bật |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **VIC** | HOSE | 245,700 | **98** | 458.3 | 2.54% | 0.72x | 5.29% | Nền giá siết chặt | Test hỗ trợ MA20 |
-| **VPL** | HOSE | 96,000 | **95** | 71.5 | 2.02% | 0.71x | 5.0% | Nền giá siết chặt |
-| **VPI** | HOSE | 58,100 | **93** | 95.0 | 2.95% | 0.83x | 4.48% | Nền giá siết chặt | Sát đỉnh 52W |
-| **NAB** | HOSE | 13,200 | **92** | 37.7 | 2.08% | 1.44x | 6.44% | Sát đỉnh 52W |
+| **VIC** | HOSE | 245,400 | **97** | 453.8 | 2.38% | 0.73x | 5.09% | Nền giá siết chặt | Test hỗ trợ MA20 |
+| **VPL** | HOSE | 97,000 | **95** | 68.9 | 2.03% | 0.84x | 5.67% | Nền giá siết chặt |
+| **VPI** | HOSE | 57,200 | **93** | 89.7 | 2.85% | 0.72x | 6.12% | Test hỗ trợ MA20 | Sát đỉnh 52W |
+| **NAB** | HOSE | 12,800 | **90** | 36.2 | 2.32% | 0.68x | 6.64% | Test hỗ trợ MA20 |
+| **VJC** | HOSE | 137,800 | **86** | 135.7 | 2.14% | 0.9x | 3.41% | Nền giá siết chặt | Test hỗ trợ MA20 |
 
 ---
 
@@ -27,5 +28,5 @@
 
 ### Nhật ký nguồn dữ liệu (Chẩn đoán kỹ thuật)
 - **Nguồn danh sách mã:** Vietcap (1519 mã)
-- **Nguồn dữ liệu giá thành công:** DNSE: 134 mã, Yahoo: 1 mã
+- **Nguồn dữ liệu giá thành công:** DNSE: 133 mã, Yahoo: 1 mã
 - **Số mã lấy được chỉ số cơ bản (FA):** 0 mã
